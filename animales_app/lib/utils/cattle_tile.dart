@@ -20,22 +20,42 @@ class CattleTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // 📏 Tamaño de pantalla
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    // 🖼️ Tamaño dinámico de imagen (proporcional al ancho de pantalla)
+    final double imageWidth = screenWidth * 0.5; // 50% del ancho
+    final double imageHeight = imageWidth * 0.8; // mantiene proporción
+
+    // ✅ Colores seguros (si cattleColor no es MaterialColor)
+    final Color baseColor = (cattleColor is MaterialColor)
+        ? cattleColor.shade50
+        : (cattleColor as Color).withOpacity(0.1);
+
+    final Color accentColor = (cattleColor is MaterialColor)
+        ? cattleColor.shade100
+        : (cattleColor as Color).withOpacity(0.2);
+
+    final Color textColor = (cattleColor is MaterialColor)
+        ? cattleColor.shade800
+        : Colors.black;
+
     return Padding(
       padding: const EdgeInsets.all(12.0),
       child: Container(
         decoration: BoxDecoration(
-          color: cattleColor[50],
+          color: baseColor,
           borderRadius: BorderRadius.circular(24.0),
         ),
         child: Column(
           children: [
-            // Precio
+            // 💲 Precio
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Container(
                   decoration: BoxDecoration(
-                    color: cattleColor[100],
+                    color: accentColor,
                     borderRadius: const BorderRadius.only(
                       bottomLeft: Radius.circular(24),
                       topRight: Radius.circular(24),
@@ -50,37 +70,34 @@ class CattleTile extends StatelessWidget {
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 18,
-                      color: cattleColor[800],
+                      color: textColor,
                     ),
                   ),
                 ),
               ],
             ),
 
-            // Imagen
+            // 🐄 Imagen (responsiva)
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 36, vertical: 12),
-              child: Image.asset(cattleImagePath),
+              child: Image.asset(
+                cattleImagePath,
+                width: imageWidth.clamp(100, 250), // entre 100 y 250 px
+                height: imageHeight.clamp(80, 200),
+                fit: BoxFit.contain,
+              ),
             ),
 
-            // Raza
+            // 🐮 Raza
             Text(
               cattleName,
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
 
-            // Proveedor
-            Text(
-              cattleProvider,
-              style: TextStyle(
-                color: Colors.grey[600],
-              ),
-            ),
+            // 🚜 Proveedor
+            Text(cattleProvider, style: TextStyle(color: Colors.grey[600])),
 
-            // Botones
+            // ❤️ Botones
             Padding(
               padding: const EdgeInsets.all(12.0),
               child: Row(
@@ -88,7 +105,8 @@ class CattleTile extends StatelessWidget {
                 children: [
                   Icon(Icons.favorite, color: Colors.pink[400]),
                   TextButton(
-                    onPressed: onAddToCart ??
+                    onPressed:
+                        onAddToCart ??
                         () {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(

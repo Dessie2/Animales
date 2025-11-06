@@ -4,10 +4,10 @@ import 'package:animales_app/models/cart.dart';
 import 'package:animales_app/models/product.dart';
 
 class CattleTab extends StatelessWidget {
-  CattleTab({super.key});
+  const CattleTab({super.key});
 
   // Lista de reses disponibles para adopción
-  final List<List<dynamic>> cattleAvailable = [
+  final List<List<dynamic>> cattleAvailable = const [
     [
       'Vaca Holstein',
       1500.0,
@@ -18,21 +18,21 @@ class CattleTab extends StatelessWidget {
     [
       'Vaca Jersey',
       1350.0,
-      Colors.brown,
+      Color(0xFF8B4513), // marrón realista
       'lib/images/jersey_cow.png',
       'Rancho Verde',
     ],
     [
       'Toro Angus',
       2000.0,
-      Colors.grey,
+      Color(0xFF2F4F4F), // gris oscuro realista
       'lib/images/angus_bull.png',
       'Hacienda Los Robles',
     ],
     [
       'Ternero Hereford',
       1200.0,
-      Colors.red,
+      Color(0xFFB22222), // rojo terroso
       'lib/images/hereford_calf.png',
       'Finca La Esperanza',
     ],
@@ -42,13 +42,15 @@ class CattleTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        final double aspectRatio =
-            constraints.maxWidth < 400 ? 1 / 1.1 : 1 / 0.9;
+        // Relación de aspecto adaptable según el ancho
+        final double aspectRatio = constraints.maxWidth < 400
+            ? 1 / 1.15
+            : 1 / 0.95;
 
         return GridView.builder(
-          padding: const EdgeInsets.all(8),
+          padding: const EdgeInsets.all(10),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
+            crossAxisCount: 2, // dos columnas
             crossAxisSpacing: 12,
             mainAxisSpacing: 12,
             childAspectRatio: aspectRatio,

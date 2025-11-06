@@ -68,7 +68,7 @@ class BirdTile extends StatelessWidget {
                 ),
                 child: Center(
                   child: AspectRatio(
-                    aspectRatio: 1,
+                    aspectRatio: 1 / 1.5,
                     child: Image.asset(birdImagePath, fit: BoxFit.contain),
                   ),
                 ),

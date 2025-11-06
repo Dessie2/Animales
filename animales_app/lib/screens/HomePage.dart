@@ -17,11 +17,11 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends State<Homepage> {
   List<Widget> myTabs = [
-    const MyTab(iconPath: 'lib/icons/cat.png', label: 'Gatos'),
-    const MyTab(iconPath: 'lib/icons/bird.png', label: 'Pájaros'),
-    const MyTab(iconPath: 'lib/icons/monkey.png', label: 'Monos'),
-    const MyTab(iconPath: 'lib/icons/cattle.png', label: 'Reses'),
-    const MyTab(iconPath: 'lib/icons/rabbit.png', label: 'Conejos'),
+    const MyTab(iconPath: 'lib/icons/gato.png', label: 'Gatos'),
+    const MyTab(iconPath: 'lib/icons/pajaro.png', label: 'Pájaros'),
+    const MyTab(iconPath: 'lib/icons/mono.png', label: 'Monos'),
+    const MyTab(iconPath: 'lib/icons/vaca.png', label: 'Reses'),
+    const MyTab(iconPath: 'lib/icons/conejo.png', label: 'Conejos'),
   ];
 
   @override
@@ -102,17 +102,25 @@ class _HomepageState extends State<Homepage> {
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.pink,
-                      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 24,
+                        vertical: 12,
+                      ),
                     ),
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const CartPage()),
+                        MaterialPageRoute(
+                          builder: (context) => const CartPage(),
+                        ),
                       ).then((_) => setState(() {}));
                     },
                     child: const Text(
                       'Ver Carrito',
-                      style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ],
